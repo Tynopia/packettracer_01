@@ -1,67 +1,122 @@
-function on_posts(request, reply){
-	Serial.println("DP - url: " + request.url() + ", ip: " + request.ip());
-	reply.setContent("posted data ignored ...");
-	reply.setStatus(200);
-	reply.end();
-}
-
-function on_gets(request, reply){
-	Serial.println("DG - url: " + request.url() + ", ip: " + request.ip());
-	url = requst.url();
-	if(url.lastIndexOf('.') != -1){
-		setContentToFile(request.url());
-	}
-	else {
-		setContent("'"+url+"' is inaccessible here...");
-		reply.setStatus(404);
-	}
-	reply.end();
-}
-
-function on_files(request, reply){
-	Serial.println("F - url: " + request.url() + ", ip: " + request.ip());
-	reply.setToFile(request.url());
-	reply.end();
-}
-
 var SIZE = 4;
 var current;
 var index = 0;
+var items = [
+	{
+		name: "Nerds box Rainbow",
+		price: 2.99,
+		image: "http://candy.shop/Nerds-Rainbow.png",
+		stock: 7,
+		purchases: []
+	},
+	{
+		name: "Alyan Dubai Schokolade",
+		price: 9.99,
+		image: "http://candy.shop/Dubai.png",
+		stock: 12,
+		purchases: []
+	},
+	{
+		name: "Sour Patch Kids",
+		price: 2.75,
+		image: "http://candy.shop/Sour-Patch-Kids.png",
+		stock: 23,
+		purchases: []
+	},
+	{
+		name: "Calypso – Island Wave",
+		price: 3.50,
+		image: "http://candy.shop/Island-Wave.png",
+		stock: 4,
+		purchases: []
+	}
+];
 
 function setup() {
 	for (var i = 0; i < SIZE; i++){
 		pinMode(i, OUTPUT);
 	}
 
-	var server = new RealHTTPServer();
-	server.start(8765);
-	Serial.println("Running: " + server.isListening());
+	pinMode(4, OUTPUT);
 
-	server.on_contacts = function(request, reply){
-		Serial.println("C - url: " + request.url() + ", ip: " + request.ip());
-		reply.setContent("reached contacts ...");
-		reply.setStatus(200);
-		reply.end();
-	};
-	
-	server.on_services = function(request, reply){
-		Serial.println("S - url: " + request.url() + ", ip: " + request.ip());
-		reply.setContent("reached services ...");
-		reply.setStatus(200);
-		reply.end();
-	};
+	HTTPServer.route("/items", function (_, res) {
+		res.setContentType("application/json");
+		res.send(JSON.stringify(items));
+	})
 
-	server.route("/*", ["GET"], on_files);
-	server.route("/contacts", ["gEt", "POST"], server.on_contacts);
-	server.route("/services/*", ["Post","get"], server.on_services);
-	server.route("*", ["GET"], on_gets);
-	server.route("*", ["POST"], on_posts);
+	HTTPServer.route("/items/*", function (url, res) {
+		var split = url.split("/")
+
+		var id = parseInt(split[2]);
+		var type = split[3];
+
+		if (type === "buy") {
+			if (items[id].stock > 0) {
+				items[id].stock--;
+				items[id].purchases.push({
+					status: 0,
+					date: Date.now()
+				})
+				res.send("Ware gekauft");
+			} else {
+				res.send("Keine Ware mehr verfügbar");
+			}
+		} else if (type === "storage") {
+			var purchase = parseInt(split[4]);
+
+			for (var i = 0; i < items.length; i++) {
+				for (var j = 0; j < items[i].purchases.length; j++) {
+					var element = items[i].purchases[j];
+					
+					if (element.status === 1) {
+						element.status = 2;
+					} else if (id === i && purchase === j) {
+						element.status = 1;
+					}
+				}
+			}
+
+			res.send("Ware markiert");
+		}
+	});
+
+	HTTPServer.start(80);
 }
 
 function loop() {
+	var hasPurchased = false
+	var current;
+
+	for (var i = 0; i < items.length; i++) {
+		for (var j = 0; j < items[i].purchases.length; j++) {
+			var element = items[i].purchases[j];
+			
+			if (element.status === 1) {
+				current = i;
+			}
+		}
+	}
+
 	for (var i = 0; i < SIZE; i++) {
 		digitalWrite(i, current === i ? index % 2 ? HIGH : LOW : LOW);
 	}
+
+	for (var i = 0; i < items.length; i++) {
+		if (hasPurchased) {
+			break;
+		}
+
+		for (var j = 0; j < items[i].purchases.length; j++) {
+			var element = items[i].purchases[j];
+			
+			if (element.status <= 1) {
+				hasPurchased = true;
+				break;
+			}
+		}
+	}
+
+	digitalWrite(4, hasPurchased ? HIGH : LOW);
 
 	index++;
 
