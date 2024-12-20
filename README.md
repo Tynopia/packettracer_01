@@ -4,47 +4,24 @@
 
 ### Candy Shop
 
-![Logo des Candy Shops](logo.png)
+![logo](logo.png)
 
-Der **Candy Shop** ist ein kleines Unternehmen, das sich auf den Verkauf von Süßigkeiten spezialisiert hat.
+Der **Candy Shop** ist ein innovatives kleines Unternehmen, das sich auf den Verkauf und die schnelle Lieferung von Süßwaren spezialisiert hat. Der Schwerpunkt liegt auf der Kombination klassischer Einzelhandelspraktiken mit modernen, digitalen Lösungen, um ein optimiertes Kundenerlebnis zu schaffen.
 
-Das Unternehmen hat nur einen Standort und beschäftigt neun Mitarbeiter.
+**Unternehmensgegenstand:**  
+Der Candy Shop bietet ein breites Sortiment an Süßwaren an, die sowohl vor Ort als auch über eine eigens entwickelte Online-Plattform bestellt werden können. Durch ein integriertes IoT-System wird der Lagerbetrieb effizient gestaltet, und Bestellungen werden automatisiert an die zuständigen Abteilungen weitergeleitet.
 
-## Abteilungen
+**Unternehmensaufbau:**  
+Das Unternehmen ist in drei Kernabteilungen gegliedert:  
+- **Buchhaltung:** Verantwortlich für die Finanzverwaltung, Rechnungsstellung und Dokumentation.  
+- **Sales:** Zuständig für den Kundenkontakt, die Pflege der Online-Plattform und den Vertrieb.  
+- **Lager:** Verwalten der Bestände, Kommissionierung und Versand der Bestellungen.
 
-<details>
-<summary>Buchhaltung</summary>
+**Unternehmensgröße:**  
+Der Candy Shop beschäftigt insgesamt neun Mitarbeiter und betreibt einen zentralen Standort mit einer modularen Netzwerkstruktur, die auf zukünftige Expansion ausgelegt ist.
 
-### Anforderungen
-
-- Keine mobilen Geräte benötigt
-- Ein Drucker für Rechnungen
-- Ein Scanner für Belege
-- Geräte für drei Mitarbeiter
-
-</details>
-
-<details>
-<summary>Sales</summary>
-
-### Anforderungen
-
-- Mobiles und agiles Arbeiten
-- Zugriff auf das zentrale System über WLAN oder mobile Geräte
-- Geräte für vier Mitarbeiter
-
-</details>
-
-<details>
-<summary>Lager</summary>
-
-### Anforderungen
-
-- Ausstattung mit Smartphones
-- IoT-Geräte zur Vereinfachung der Lagerverwaltung (z. B. für Bestandsüberwachung und Produktlokalisierung)
-- Geräte für zwei Mitarbeiter
-
-</details>
+**Bezug zum Netz:**  
+Das Unternehmen setzt ein integriertes Netzwerk ein, das verschiedene Abteilungen effizient verbindet. Dies umfasst sowohl kabelgebundene als auch drahtlose Verbindungen. Besonders hervorzuheben ist der Einsatz eines RADIUS-Servers für sichere WLAN-Authentifizierung und eines zentralen HTTP-Systems zur Steuerung des IoT-Netzwerks.
 
 ## Namenskonzept der Geräte
 
@@ -117,6 +94,10 @@ Das Unternehmen hat nur einen Standort und beschäftigt neun Mitarbeiter.
 | SAL-NB-01       | WIRELESS0 | DHCP          | 255.255.255.0             | 192.168.1.1     |
 | SAL-NB-02       | WIRELESS0 | DHCP          | 255.255.255.0             | 192.168.1.1     |
 
+## Netztopologie
+
+![topologie](topologie.png)
+
 ## Weitere Informationen
 
 - Alle unnötigen Ports wurden entfernt und mit Abdeckungen versehen.
@@ -141,7 +122,7 @@ Ein **IoT-System** wurde entwickelt, um den Kauf und Versand von Süßigkeiten z
 
 ### Aus Kundensicht
 
-1. Besuchen Sie die Website: `http://candy.shop`
+1. Besuchen Sie die Website: `http://candy.shop` oder `http://www.candy.shop`
 2. Klicken Sie auf "Jetzt Einkaufen".
 3. Wählen Sie Süßigkeiten aus (einige Produkte können ausverkauft sein).
 4. Die Daten sind zentral gespeichert und von jedem Gerät aus zugänglich.
@@ -159,3 +140,8 @@ Ein **IoT-System** wurde entwickelt, um den Kauf und Versand von Süßigkeiten z
 
 - Der Code ist auf dem Gerät `STO-SBC-01` unter `iot.js` gespeichert.
 - Die HTTP-Seite wurde in **Vite React TypeScript** entwickelt.
+
+### GitHub
+Das vollständige Projekt, einschließlich aller Codes und der Versionshistorie, kann auf GitHub eingesehen werden:
+
+https://github.com/Tynopia/packettracer_01
