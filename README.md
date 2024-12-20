@@ -43,9 +43,6 @@ Das Unternehmen setzt ein integriertes Netzwerk ein, das verschiedene Abteilunge
 
 | Name        | Passwort           | Modus     |
 | ----------- | ------------------ | --------- |
-| `core-rt`   | `Dz83NJ048q0j6T5J` | EXEC Mode |
-| `core-rt`   | `M1C8HPMmGGFLAYot` | Console   |
-| `core-rt`   | `Il68ZJVGZf1P2Jvw` | SSH       |
 | `core-sw`   | `7wj4VEvUeDS3Dj8H` | EXEC Mode |
 | `core-sw`   | `wSg1OQ10gfgxBUcr` | Console   |
 | `core-sw`   | `cfpjy3ofdv2I8rBs` | SSH       |
