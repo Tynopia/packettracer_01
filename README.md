@@ -9,7 +9,7 @@
 Der **Candy Shop** ist ein innovatives kleines Unternehmen, das sich auf den Verkauf und die schnelle Lieferung von Süßwaren spezialisiert hat. Der Schwerpunkt liegt auf der Kombination klassischer Einzelhandelspraktiken mit modernen, digitalen Lösungen, um ein optimiertes Kundenerlebnis zu schaffen.
 
 **Unternehmensgegenstand:**  
-Der Candy Shop bietet ein breites Sortiment an Süßwaren an, die sowohl vor Ort als auch über eine eigens entwickelte Online-Plattform bestellt werden können. Durch ein integriertes IoT-System wird der Lagerbetrieb effizient gestaltet, und Bestellungen werden automatisiert an die zuständigen Abteilungen weitergeleitet.
+Der Candy Shop bietet ein breites Sortiment an Süßwaren an, die über eine eigens entwickelte Online-Plattform bestellt werden können. Durch ein integriertes IoT-System wird der Lagerbetrieb effizient gestaltet, und Bestellungen werden automatisiert an die zuständigen Abteilungen weitergeleitet.
 
 **Unternehmensaufbau:**  
 Das Unternehmen ist in drei Kernabteilungen gegliedert:  
@@ -39,7 +39,7 @@ Das Unternehmen setzt ein integriertes Netzwerk ein, das verschiedene Abteilunge
 
 ## Passwörter
 
-### Switches
+### Switch
 
 | Name        | Passwort           | Modus     |
 | ----------- | ------------------ | --------- |
@@ -61,6 +61,14 @@ Das Unternehmen setzt ein integriertes Netzwerk ein, das verschiedene Abteilunge
 | `acc-sw-01` | `yAyn0tdvFPFs9DD6` | EXEC Mode |
 | `acc-sw-01` | `7j6Zg4t4YegeDn5K` | Console   |
 | `acc-sw-01` | `1JsM1Je7zH9JvKiJ` | SSH       |
+
+### Router
+
+| Name      | Passwort           | Modus     |
+| --------- | ------------------ | --------- |
+| `core-rt` | `Dz83NJ048q0j6T5J` | EXEC Mode |
+| `core-rt` | `M1C8HPMmGGFLAYot` | Console   |
+| `core-rt` | `Il68ZJVGZf1P2Jvw` | SSH       |
 
 > **Hinweis:** Der Benutzername für alle SSH-Zugriffe ist `admin`.
 
@@ -129,10 +137,11 @@ Ein **IoT-System** wurde entwickelt, um den Kauf und Versand von Süßigkeiten z
 
 ### Aus Lagersicht
 
-1. Bei einer Bestellung ertönt ein Alarm.
-2. Mitarbeiter sehen die Bestellung und können die Süßigkeiten verpacken.
-3. Beim Klick auf "Im Lager markieren" leuchtet eine LED am Lagerort des Produkts.
-4. Nach dem Klick auf "Verpackt" erlischt die LED, und die Bestellung wird als "Versandt" markiert.
+1. Besuchen Sie die Website: `http://storage.candy`
+2. Bei einer Bestellung ertönt ein Alarm.
+3. Mitarbeiter sehen die Bestellung und können die Süßigkeiten verpacken.
+4. Beim Klick auf "Im Lager markieren" leuchtet eine LED am Lagerort des Produkts.
+5. Nach dem Klick auf "Verpackt" erlischt die LED, und die Bestellung wird als "Versandt" markiert.
 
 > **Hinweis:** Eine neue Bestellung aktiviert die LED des neuen Produkts und markiert die alte Bestellung automatisch als "Versandt".
 
