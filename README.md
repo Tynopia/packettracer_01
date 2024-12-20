@@ -119,6 +119,13 @@ In der ursprünglichen Aufgabe war PSK-Authentifizierung vorgesehen. Es wurde st
 - Erhöhte Sicherheit
 - Einfache Verwaltung der Zugangsdaten
 
+### Benutzer
+
+| Benutzername | Passwort           |
+| ------------ | ------------------ |
+| lukas        | `gIAASa2ORTN8D9qz` |
+| philipp      | `D8bLB6nhblKT0a21` |
+
 ## IoT / HTTP-Seite
 
 Ein **IoT-System** wurde entwickelt, um den Kauf und Versand von Süßigkeiten zu vereinfachen.
