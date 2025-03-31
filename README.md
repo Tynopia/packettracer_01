@@ -34,8 +34,8 @@ Das Unternehmen setzt ein integriertes Netzwerk ein, das verschiedene Abteilunge
 
 ### Netzwerke
 
-- **Internes Netzwerk:** `192.168.1.0/24`
-- **Externes/virtuelles Internet:** `192.168.2.0/24`
+- **Internes Netzwerk:** `10.207.0.0/16`
+- **Externes/virtuelles Internet:** `172.29.107.0/24`
 
 ## Passwörter
 
@@ -69,35 +69,44 @@ Das Unternehmen setzt ein integriertes Netzwerk ein, das verschiedene Abteilunge
 
 > **Hinweis:** Der Benutzername für alle SSH-Zugriffe ist `admin`.
 
+## VLAN
+
+| Name        | Netzwerk       | VLAN-ID | Beschreibung      |
+| ----------- | -------------- | ------- | ----------------- |
+| Buchhaltung | 10.207.10.0/24 | 10      | Buchhaltung (ACC) |
+| Server      | 10.207.20.0/24 | 20      | Server (SRV)      |
+| Storage     | 10.207.30.0/24 | 30      | Lager (STO)       |
+| Sales       | 10.207.40.0/24 | 40      | Vertrieb (SAL)    |
+| Management  | 10.207.99.0/24 | 99      | Management        |
+
 ## Addressierungstabelle
 
-| Name            | Interface | IP Address    | Subnet Mask / CIDR-Suffix | Default Gateway |
-| --------------- | --------- | ------------- | ------------------------- | --------------- |
-| Core-RT         | G/1/0     | 192.168.2.1   | 255.255.255.0             | N/A*            |
-| Core-RT         | G/0/0     | 192.168.1.1   | 255.255.255.0             | N/A*            |
-| Core-SW         | VLAN1     | 192.168.1.240 | 255.255.255.0             | 192.168.1.1     |
-| SAL-SW-01       | VLAN1     | 192.168.1.241 | 255.255.255.0             | 192.168.1.1     |
-| STO-SW-01       | VLAN1     | 192.168.1.242 | 255.255.255.0             | 192.168.1.1     |
-| SRV-SW-01       | VLAN1     | 192.168.1.243 | 255.255.255.0             | 192.168.1.1     |
-| ACC-SW-01       | VLAN1     | 192.168.1.244 | 255.255.255.0             | 192.168.1.1     |
-| ACC-PC-01       | NIC       | DHCP          | 255.255.255.0             | 192.168.1.1     |
-| ACC-PC-02       | NIC       | DHCP          | 255.255.255.0             | 192.168.1.1     |
-| ACC-PC-03       | NIC       | DHCP          | 255.255.255.0             | 192.168.1.1     |
-| ACC-PR-01       | NIC       | DHCP          | 255.255.255.0             | 192.168.1.1     |
-| SRV-DHCP-01     | NIC       | 192.168.1.254 | 255.255.255.0             | 192.168.1.1     |
-| SRV-DNS-01      | NIC       | 192.168.1.253 | 255.255.255.0             | 192.168.1.1     |
-| SRV-RADIUS-01   | NIC       | 192.168.1.252 | 255.255.255.0             | 192.168.1.1     |
-| SRV-HTTP-STO-01 | NIC       | 192.168.1.251 | 255.255.255.0             | 192.168.1.1     |
-| SRV-WLC-01      | NIC       | 192.168.1.231 | 255.255.255.0             | 192.168.1.1     |
-| STO-AP-01       | G0        | DHCP          | 255.255.255.0             | 192.168.1.1     |
-| STO-PHO-01      | WIRELESS0 | DHCP          | 255.255.255.0             | 192.168.1.1     |
-| STO-PHO-02      | WIRELESS0 | DHCP          | 255.255.255.0             | 192.168.1.1     |
-| STO-SBC-01      | G0        | 192.168.1.230 | 255.255.255.0             | 192.168.1.1     |
-| SAL-AP-01       | G0        | DHCP          | 255.255.255.0             | 192.168.1.1     |
-| SAL-PC-01       | NIC       | DHCP          | 255.255.255.0             | 192.168.1.1     |
-| SAL-PC-02       | NIC       | DHCP          | 255.255.255.0             | 192.168.1.1     |
-| SAL-NB-01       | WIRELESS0 | DHCP          | 255.255.255.0             | 192.168.1.1     |
-| SAL-NB-02       | WIRELESS0 | DHCP          | 255.255.255.0             | 192.168.1.1     |
+| Name            | Interface | IP Address      | Subnet Mask / CIDR-Suffix | Default Gateway |
+| --------------- | --------- | --------------- | ------------------------- | --------------- |
+| Core-RT         | G/1/0     | 172.29.107.1/24 | 255.255.255.0             | N/A*            |
+| Core-RT         | G/0/0     | 10.207.1.1      | 255.255.255.0             | N/A*            |
+| Core-SW         | VLAN10    | 10.207.10.254   | 255.255.255.0             | 10.207.1.1      |
+| Core-SW         | VLAN20    | 10.207.20.254   | 255.255.255.0             | 10.207.1.1      |
+| Core-SW         | VLAN30    | 10.207.30.254   | 255.255.255.0             | 10.207.1.1      |
+| Core-SW         | VLAN40    | 10.207.40.254   | 255.255.255.0             | 10.207.1.1      |
+| ACC-PC-01       | NIC       | DHCP            | 255.255.255.0             | 10.207.10.254   |
+| ACC-PC-02       | NIC       | DHCP            | 255.255.255.0             | 10.207.10.254   |
+| ACC-PC-03       | NIC       | DHCP            | 255.255.255.0             | 10.207.10.254   |
+| ACC-PR-01       | NIC       | DHCP            | 255.255.255.0             | 10.207.10.254   |
+| SRV-DHCP-01     | NIC       | 10.207.20.1     | 255.255.255.0             | 10.207.10.254   |
+| SRV-DNS-01      | NIC       | 10.207.20.2     | 255.255.255.0             | 10.207.20.254   |
+| SRV-RADIUS-01   | NIC       | 10.207.20.3     | 255.255.255.0             | 10.207.20.254   |
+| SRV-HTTP-STO-01 | NIC       | 10.207.20.4     | 255.255.255.0             | 10.207.20.254   |
+| SRV-WLC-01      | NIC       | 10.207.20.5     | 255.255.255.0             | 10.207.20.254   |
+| STO-AP-01       | G0        | DHCP            | 255.255.255.0             | 10.207.30.254   |
+| STO-PHO-01      | WIRELESS0 | DHCP            | 255.255.255.0             | 10.207.30.254   |
+| STO-PHO-02      | WIRELESS0 | DHCP            | 255.255.255.0             | 10.207.30.254   |
+| STO-SBC-01      | G0        | 10.207.30.1     | 255.255.255.0             | 10.207.30.254   |
+| SAL-AP-01       | G0        | DHCP            | 255.255.255.0             | 10.207.40.254   |
+| SAL-PC-01       | NIC       | DHCP            | 255.255.255.0             | 10.207.40.254   |
+| SAL-PC-02       | NIC       | DHCP            | 255.255.255.0             | 10.207.40.254   |
+| SAL-NB-01       | WIRELESS0 | DHCP            | 255.255.255.0             | 10.207.40.254   |
+| SAL-NB-02       | WIRELESS0 | DHCP            | 255.255.255.0             | 10.207.40.254   |
 
 ## Netztopologie
 
