@@ -75,6 +75,7 @@ Das Unternehmen setzt ein integriertes Netzwerk ein, das verschiedene Abteilunge
 
 | Name        | Netzwerk       | VLAN-ID | Beschreibung      |
 | ----------- | -------------- | ------- | ----------------- |
+| Default     | 10.207.1.0/24  | 1       | Standard          |
 | Buchhaltung | 10.207.10.0/24 | 10      | Buchhaltung (ACC) |
 | Server      | 10.207.20.0/24 | 20      | Server (SRV)      |
 | Storage     | 10.207.30.0/24 | 30      | Lager (STO)       |
