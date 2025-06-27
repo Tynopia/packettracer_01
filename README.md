@@ -37,6 +37,8 @@ Das Unternehmen setzt ein integriertes Netzwerk ein, das verschiedene Abteilunge
 - **Internes Netzwerk:** `10.207.0.0/16`
 - **Externes/virtuelles Internet:** `172.29.107.0/24`
 
+> Das externe Netzwerk wurde über mehrere Router-Hops hinweg durch OSPF statt statischem Routing erreichbar gemacht
+
 ## Passwörter
 
 ### Switch
@@ -81,32 +83,46 @@ Das Unternehmen setzt ein integriertes Netzwerk ein, das verschiedene Abteilunge
 
 ## Addressierungstabelle
 
-| Name            | Interface | IP Address      | Subnet Mask / CIDR-Suffix | Default Gateway |
-| --------------- | --------- | --------------- | ------------------------- | --------------- |
-| Core-RT         | G/1/0     | 172.29.107.1/24 | 255.255.255.0             | N/A*            |
-| Core-RT         | G/0/0     | 10.207.1.1      | 255.255.255.0             | N/A*            |
-| Core-SW         | VLAN10    | 10.207.10.254   | 255.255.255.0             | 10.207.1.1      |
-| Core-SW         | VLAN20    | 10.207.20.254   | 255.255.255.0             | 10.207.1.1      |
-| Core-SW         | VLAN30    | 10.207.30.254   | 255.255.255.0             | 10.207.1.1      |
-| Core-SW         | VLAN40    | 10.207.40.254   | 255.255.255.0             | 10.207.1.1      |
-| ACC-PC-01       | NIC       | DHCP            | 255.255.255.0             | 10.207.10.254   |
-| ACC-PC-02       | NIC       | DHCP            | 255.255.255.0             | 10.207.10.254   |
-| ACC-PC-03       | NIC       | DHCP            | 255.255.255.0             | 10.207.10.254   |
-| ACC-PR-01       | NIC       | DHCP            | 255.255.255.0             | 10.207.10.254   |
-| SRV-DHCP-01     | NIC       | 10.207.20.1     | 255.255.255.0             | 10.207.10.254   |
-| SRV-DNS-01      | NIC       | 10.207.20.2     | 255.255.255.0             | 10.207.20.254   |
-| SRV-RADIUS-01   | NIC       | 10.207.20.3     | 255.255.255.0             | 10.207.20.254   |
-| SRV-HTTP-STO-01 | NIC       | 10.207.20.4     | 255.255.255.0             | 10.207.20.254   |
-| SRV-WLC-01      | NIC       | 10.207.20.5     | 255.255.255.0             | 10.207.20.254   |
-| STO-AP-01       | G0        | DHCP            | 255.255.255.0             | 10.207.30.254   |
-| STO-PHO-01      | WIRELESS0 | DHCP            | 255.255.255.0             | 10.207.30.254   |
-| STO-PHO-02      | WIRELESS0 | DHCP            | 255.255.255.0             | 10.207.30.254   |
-| STO-SBC-01      | G0        | 10.207.30.1     | 255.255.255.0             | 10.207.30.254   |
-| SAL-AP-01       | G0        | DHCP            | 255.255.255.0             | 10.207.40.254   |
-| SAL-PC-01       | NIC       | DHCP            | 255.255.255.0             | 10.207.40.254   |
-| SAL-PC-02       | NIC       | DHCP            | 255.255.255.0             | 10.207.40.254   |
-| SAL-NB-01       | WIRELESS0 | DHCP            | 255.255.255.0             | 10.207.40.254   |
-| SAL-NB-02       | WIRELESS0 | DHCP            | 255.255.255.0             | 10.207.40.254   |
+| Name            | Interface | IP Address     | Subnet Mask / CIDR-Suffix | Default Gateway |
+| --------------- | --------- | -------------- | ------------------------- | --------------- |
+| Core-RT         | G/1/0     | 192.168.0.1/30 | 255.255.255.252           | N/A*            |
+| Core-RT         | G/0/0     | 10.207.1.2/24  | 255.255.255.0             | N/A*            |
+| Core-SW         | VLAN1     | 10.207.1.1     | 255.255.255.0             | 10.207.1.254    |
+| Core-SW         | VLAN10    | 10.207.10.254  | 255.255.255.0             | 10.207.1.254    |
+| Core-SW         | VLAN20    | 10.207.20.254  | 255.255.255.0             | 10.207.1.254    |
+| Core-SW         | VLAN30    | 10.207.30.254  | 255.255.255.0             | 10.207.1.254    |
+| Core-SW         | VLAN40    | 10.207.40.254  | 255.255.255.0             | 10.207.1.254    |
+| Core-SW         | VLAN99    | 10.207.99.1    | 255.255.255.0             | 10.207.1.254    |
+| ACC-PC-01       | NIC       | DHCP           | 255.255.255.0             | 10.207.10.254   |
+| ACC-PC-02       | NIC       | DHCP           | 255.255.255.0             | 10.207.10.254   |
+| ACC-PC-03       | NIC       | DHCP           | 255.255.255.0             | 10.207.10.254   |
+| ACC-PR-01       | NIC       | DHCP           | 255.255.255.0             | 10.207.10.254   |
+| ACC-PC-01       | NIC       | SLAAC          | /64                       | FE80::1         |
+| ACC-PC-02       | NIC       | SLAAC          | /64                       | FE80::1         |
+| ACC-PC-03       | NIC       | SLAAC          | /64                       | FE80::1         |
+| ACC-PR-01       | NIC       | SLAAC          | /64                       | FE80::1         |
+| SRV-DHCP-01     | NIC       | 10.207.20.1    | 255.255.255.0             | 10.207.10.254   |
+| SRV-DNS-01      | NIC       | 10.207.20.2    | 255.255.255.0             | 10.207.20.254   |
+| SRV-RADIUS-01   | NIC       | 10.207.20.3    | 255.255.255.0             | 10.207.20.254   |
+| SRV-HTTP-STO-01 | NIC       | 10.207.20.4    | 255.255.255.0             | 10.207.20.254   |
+| SRV-WLC-01      | NIC       | 10.207.20.5    | 255.255.255.0             | 10.207.20.254   |
+| STO-AP-01       | G0        | DHCP           | 255.255.255.0             | 10.207.30.254   |
+| STO-PHO-01      | WIRELESS0 | DHCP           | 255.255.255.0             | 10.207.30.254   |
+| STO-PHO-02      | WIRELESS0 | DHCP           | 255.255.255.0             | 10.207.30.254   |
+| STO-PHO-01      | WIRELESS0 | SLAAC          | /64                       | FE80::1         |
+| STO-PHO-02      | WIRELESS0 | SLAAC          | /64                       | FE80::1         |
+| STO-SBC-01      | G0        | 10.207.30.1    | 255.255.255.0             | 10.207.30.254   |
+| SAL-AP-01       | G0        | DHCP           | 255.255.255.0             | 10.207.40.254   |
+| SAL-PC-01       | NIC       | DHCP           | 255.255.255.0             | 10.207.40.254   |
+| SAL-PC-02       | NIC       | DHCP           | 255.255.255.0             | 10.207.40.254   |
+| SAL-NB-01       | WIRELESS0 | DHCP           | 255.255.255.0             | 10.207.40.254   |
+| SAL-NB-02       | WIRELESS0 | DHCP           | 255.255.255.0             | 10.207.40.254   |
+| SAL-PC-01       | NIC       | SLAAC          | /64                       | FE80::1         |
+| SAL-PC-02       | NIC       | SLAAC          | /64                       | FE80::1         |
+| SAL-NB-01       | WIRELESS0 | SLAAC          | /64                       | FE80::1         |
+| SAL-NB-02       | WIRELESS0 | SLAAC          | /64                       | FE80::1         |
+
+> Obwohl es nicht als Pflichtaufgabe gefordert war, wurden die Geräte zusätzlich über IPv6 erreichbar gemacht
 
 ## Netztopologie
 
